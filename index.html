@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nirmal — Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-600: #0F6E56;
+    --teal-700: #1D9E75;
+    --purple-50: #EEEDFE;
+    --purple-600: #534AB7;
+    --blue-50: #E6F1FB;
+    --blue-600: #185FA5;
+    --gray-50: #F8F7F4;
+    --gray-100: #F1EFE8;
+    --gray-200: #D3D1C7;
+    --gray-400: #888780;
+    --gray-800: #2C2C2A;
+    --text-primary: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --border: #D3D1C7;
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  nav {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.1rem 0;
+    position: sticky;
+    top: 0;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+
+  nav .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  nav .logo {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  nav .links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  nav .links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  nav .links a:hover { color: var(--text-primary); }
+
+  section { padding: 3.5rem 0; border-bottom: 0.5px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Hero */
+  .hero { padding-top: 4rem; padding-bottom: 4rem; }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--teal-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--teal-600);
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--teal-100);
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .hero .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero .bio {
+    font-size: 16px;
+    color: var(--text-primary);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+  }
+
+  .cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 0.5px solid var(--border);
+    color: var(--text-primary);
+    background: var(--surface);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .btn:hover { background: var(--gray-100); }
+
+  .btn.primary {
+    background: var(--teal-700);
+    color: #fff;
+    border-color: var(--teal-700);
+  }
+
+  .btn.primary:hover { background: var(--teal-600); border-color: var(--teal-600); }
+
+  /* Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .tl-item { display: flex; gap: 1rem; }
+
+  .tl-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--teal-700);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot.muted { background: var(--gray-200); }
+
+  .tl-line {
+    width: 1px;
+    background: var(--border);
+    flex: 1;
+    min-height: 24px;
+    margin: 4px auto 0;
+  }
+
+  .tl-body { padding-bottom: 2rem; flex: 1; }
+  .tl-body:last-child { padding-bottom: 0; }
+
+  .tl-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .tl-title { font-weight: 600; font-size: 14px; color: var(--text-primary); }
+  .tl-date { font-size: 12px; color: var(--text-secondary); }
+  .tl-company { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+
+  .tl-desc { font-size: 14px; color: var(--text-primary); line-height: 1.65; }
+
+  .impact-pill {
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--teal-50);
+    color: var(--teal-600);
+    margin-top: 8px;
+    margin-right: 6px;
+    font-weight: 500;
+  }
+
+  /* Cards */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+
+  .card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .card:hover { border-color: var(--gray-400); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+  .card-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .badge-teal { background: var(--teal-50); color: var(--teal-600); }
+  .badge-purple { background: var(--purple-50); color: var(--purple-600); }
+  .badge-blue { background: var(--blue-50); color: var(--blue-600); }
+
+  .card-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; color: var(--text-primary); }
+  .card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  .metrics { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1rem; }
+
+  .metric {
+    background: var(--gray-100);
+    border-radius: 8px;
+    padding: 8px 14px;
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .metric .num { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+  .metric .mlab { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+
+  .skill-group-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.07em; }
+
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    color: var(--text-secondary);
+    margin: 3px 2px;
+  }
+
+  .tag.accent { background: var(--teal-50); color: var(--teal-600); border-color: var(--teal-100); }
+
+  .chip {
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--purple-50);
+    color: var(--purple-600);
+    margin: 3px 2px;
+  }
+
+  /* Contact */
+  .contact-box {
+    background: var(--teal-50);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    border: 0.5px solid var(--teal-100);
+  }
+
+  .contact-box h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-800); }
+  .contact-box p { color: var(--teal-600); margin-bottom: 1.5rem; font-size: 14px; }
+
+  footer {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+    border-top: 0.5px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.6rem; }
+    section { padding: 2.5rem 0; }
+    .contact-box { padding: 1.75rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a class="logo" href="#">Nirmal</a>
+    <ul class="links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="avatar">N</div>
+    <h1>Nirmal</h1>
+    <p class="subtitle">Product Manager &nbsp;·&nbsp; Consumer Fintech &nbsp;·&nbsp; Bengaluru</p>
+    <p class="bio">6 years building consumer fintech products — from 0→1 launches to growth and monetization. Currently at BEEM, previously at Jar and Vedantu. I care about making financial tools that actually work for everyday Indians.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="mailto:your@email.com">&#9993; &nbsp;Get in touch</a>
+      <a class="btn" href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn ↗</a>
+      <a class="btn" href="resume.pdf" target="_blank">Resume ↗</a>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <p class="eyebrow">Work experience</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-spine">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-title">Product Manager — BEEM</span>
+            <span class="tl-date">2022 – present</span>
+          </div>
+          <p class="tl-company">Consumer fintech · Bengaluru</p>
+          <p class="tl-desc">Led 0→1 launch of gift card product (new revenue stream), AI-powered onboarding campaigns, and subscription UX. Owned end-to-end roadmap across acquisition, activation, and monetization.</p>
+          <span class="impact-pill">↑ CVR on key flows</span>
+          <span class="impact-pill">0→1 gift cards</span>
+          <span class="impact-pill">2× user growth</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-spine">
+          <div class="tl-dot" style="background:#9FE1CB;"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-title">PM / Product Analyst — Jar</span>
+            <span class="tl-date">2021 – 2022</span>
+          </div>
+          <p class="tl-company">Micro-savings fintech · Bengaluru</p>
+          <p class="tl-desc">Worked on micro-savings product growth and analytics. Deep exposure to UPI AutoPay, BBPS, and the Indian fintech stack. Built habit-forming round-up savings flows for young Indian users.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-spine">
+          <div class="tl-dot muted"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-title">Subject Matter Expert → Product Associate — Vedantu</span>
+            <span class="tl-date">2020 – 2021</span>
+          </div>
+          <p class="tl-company">Edtech · Bengaluru</p>
+          <p class="tl-desc">Transitioned from SME to product track. Built foundational product thinking and user research skills in a high-growth edtech environment.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section id="work">
+    <p class="eyebrow">PM case studies</p>
+    <div class="card-grid">
+
+      <div class="card">
+        <span class="card-badge badge-teal">0→1 build</span>
+        <p class="card-title">BEEM Gift Cards</p>
+        <p class="card-desc">Launched a brand-new revenue stream from scratch — problem discovery, partner alignment, virality loop design, and full ownership from scoping to launch.</p>
+        <div class="metrics">
+          <div class="metric"><div class="num">0→1</div><div class="mlab">New product</div></div>
+          <div class="metric"><div class="num">New</div><div class="mlab">Revenue stream</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-purple">AI + Growth</span>
+        <p class="card-title">AI-Powered Onboarding</p>
+        <p class="card-desc">Cohort-based personalization using AI to improve CVR and lead quality. Measurable improvements across acquisition campaigns at BEEM.</p>
+        <div class="metrics">
+          <div class="metric"><div class="num">↑ CVR</div><div class="mlab">Conversion</div></div>
+          <div class="metric"><div class="num">AI</div><div class="mlab">Personalized</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-blue">Fintech growth</span>
+        <p class="card-title">Jar Micro-Savings</p>
+        <p class="card-desc">Round-up savings via UPI AutoPay and building habits that stick for young Indian users. Deep fintech stack work including BBPS integration.</p>
+        <div class="metrics">
+          <div class="metric"><div class="num">UPI</div><div class="mlab">AutoPay</div></div>
+          <div class="metric"><div class="num">BBPS</div><div class="mlab">Integration</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Side Projects -->
+  <section id="projects">
+    <p class="eyebrow">Side projects</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-badge badge-purple">In progress</span>
+        <p class="card-title">AI Budgeting App</p>
+        <p class="card-desc">Personal finance web app for young Indian professionals (22–30). AI-powered SIP, EMI, and tax-saving advice. Built an 8-week MVP roadmap using no-code tools.</p>
+        <div style="margin-top: 12px;">
+          <span class="chip">Framer</span>
+          <span class="chip">Claude API</span>
+          <span class="chip">Tally</span>
+          <span class="chip">Notion</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="eyebrow">Skills & tools</p>
+    <div class="skills-grid">
+      <div>
+        <p class="skill-group-title">Product craft</p>
+        <span class="tag accent">Growth</span>
+        <span class="tag accent">Onboarding</span>
+        <span class="tag accent">Monetization</span>
+        <span class="tag accent">0→1 builds</span>
+        <span class="tag accent">System design</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Domain</p>
+        <span class="tag">Consumer fintech</span>
+        <span class="tag">UPI / BBPS</span>
+        <span class="tag">Micro-savings</span>
+        <span class="tag">AI products</span>
+        <span class="tag">Edtech</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Analytics & data</p>
+        <span class="tag">Amplitude</span>
+        <span class="tag">Clevertap</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">Stitch</span>
+      </div>
+      <div>
+        <p class="skill-group-title">Design & AI tools</p>
+        <span class="tag">Figma</span>
+        <span class="tag">Claude / Gemini</span>
+        <span class="tag">Miro</span>
+        <span class="tag">Framer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="border-bottom: none;">
+    <div class="contact-box">
+      <h2>Let's work together</h2>
+      <p>Open to product roles in fintech, AI products, and consumer apps. Based in Bengaluru.</p>
+      <div class="cta-row" style="justify-content: center;">
+        <a class="btn primary" href="mailto:your@email.com">&#9993; &nbsp;your@email.com</a>
+        <a class="btn" href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Built with care · Nirmal · Bengaluru, India</p>
+</footer>
+
+</body>
+</html>
